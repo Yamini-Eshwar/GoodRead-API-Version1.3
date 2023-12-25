@@ -93,3 +93,17 @@ app.delete('/books/:bookId/', async (request, response) => {
   await db.run(deelteBookQuery)
   response.send('deleted Book Sucessfully....')
 })
+
+//Get Author Books API
+app.get('/authors/:authorId/books/', async (request, response) => {
+  const {authorId} = request.params
+  console.log(authorId)
+  const getAuthorBookQuery = `
+  SELECT *
+  FROM
+  book
+  WHERE
+  author_id = ${authorId};`
+  const booksArray = await db.all(getAuthorBookQuery)
+  response.send(booksArray)
+})
