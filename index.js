@@ -82,3 +82,14 @@ app.put('/books/:bookId/', async (request, response) => {
   await db.run(updateQuery)
   response.send('Book Updated Succesfully...')
 })
+
+//DELETE Book API
+app.delete('/books/:bookId/', async (request, response) => {
+  const {bookId} = request.params
+  const deelteBookQuery = `
+  DELETE FROM 
+  book
+  WHERE book_id=${bookId};`
+  await db.run(deelteBookQuery)
+  response.send('deleted Book Sucessfully....')
+})
